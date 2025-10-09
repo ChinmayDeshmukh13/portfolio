@@ -318,7 +318,15 @@
         let db;
         try {
             // These variables are provided by the environment.
-            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+           const firebaseConfig = {
+              apiKey: "AIzaSyDR6UYgIJrFCD3BrQg9IBiE58_EmJbqui0",
+              authDomain: "portfolio-82fd5.firebaseapp.com",
+              projectId: "portfolio-82fd5",
+              storageBucket: "portfolio-82fd5.firebasestorage.app",
+              messagingSenderId: "758286271005",
+              appId: "1:758286271005:web:64a73aa923e469048d3cf4",
+              measurementId: "G-VG4CVST2BE"
+            };
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             const auth = getAuth(app);
@@ -442,7 +450,7 @@
         });
 
         // --- Gemini API Integration ---
-        const API_KEY = ""; // Canvas will handle the API key.
+        const API_KEY = "AIzaSyDOvZe-4UkYpyJCal0Dx87CKVp8NoPP8r8"; // Canvas will handle the API key.
 
         async function callGeminiWithExponentialBackoff(prompt) {
             const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
@@ -540,4 +548,5 @@
 </body>
 
 </html>
+
 
