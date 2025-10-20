@@ -157,7 +157,7 @@
             <!-- Home Section -->
             <section id="home" class="min-h-screen flex items-center">
                 <div class="max-w-4xl fade-in text-center mx-auto">
-                    <p class="text-blue-500 font-medium mb-4 text-lg">Hi, my name is</p>
+                    <p id="intro-text" class="text-blue-500 font-medium mb-4 text-lg">Hi, my name is</p>
                     <h1 id="greeting-header" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">Chinmay Deshmukh.</h1>
                     <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 leading-relaxed">
                         I'm a final year Data Science student specializing in creating end-to-end Machine Learning solutions. Currently focused on <span id="typed-text" class="text-blue-400 font-semibold"></span>.
@@ -374,16 +374,20 @@
             const auth = getAuth(app);
             await signInAnonymously(auth);
         } catch (e) { console.error("Firebase init failed.", e); }
+
         const proceedToSite = (visitorName) => {
             if (visitorName) {
+                const introText = document.getElementById('intro-text');
                 const greetingHeader = document.getElementById('greeting-header');
-                if (greetingHeader) {
-                    greetingHeader.innerHTML = `Hi <span class="text-blue-500">${visitorName}</span>, I'm Chinmay.`;
+                if (introText && greetingHeader) {
+                    introText.style.display = 'none'; // Hide the original intro
+                    greetingHeader.innerHTML = `Hi <span class="text-blue-500">${visitorName}</span>! I'm Chinmay.`;
                 }
             }
             welcomeOverlay.style.opacity = '0';
             setTimeout(() => { welcomeOverlay.style.display = 'none'; }, 1000);
         };
+
         const handleSubmitName = async () => {
             const visitorName = nameInput.value.trim();
             if (!visitorName) { proceedToSite(null); return; }
@@ -475,4 +479,5 @@
 </body>
 
 </html>
+
 
