@@ -1,483 +1,316 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en" class="dark">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VG4CVST2BE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VG4CVST2BE');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinmay Deshmukh | Data Scientist Portfolio</title>
+    <title>Chinmay Deshmukh | Data Scientist</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9',
+                        dark: '#020617',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #020617; /* Slate 950 */
-            color: #d1d5db; /* Gray 300 */
-        }
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-        }
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-        .glass-nav {
-            background: rgba(3, 7, 18, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .section-line {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 4rem;
-        }
-        .section-line::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 8px;
-            bottom: 8px;
-            width: 2px;
-            background-color: #1e293b; /* Slate 800 */
-        }
-        .section-line .icon {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 24px;
-            height: 24px;
-            background-color: #020617;
-            border: 2px solid #3b82f6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .project-card {
-            background: #0f172a; /* Slate 900 */
-            border: 1px solid #1e293b; /* Slate 800 */
-            transition: all 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: #3b82f6;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
-        }
-        .skill-tag {
-            background-color: #1e293b; /* Slate 800 */
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-        .skill-tag:hover {
-            border-color: #3b82f6;
-            color: #eff6ff; /* Blue 50 */
-        }
-        .fade-in {
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #e2e8f0; }
+        
+        .tab-content {
+            display: none;
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        .fade-in.visible {
+        .tab-content.active {
             opacity: 1;
             transform: translateY(0);
         }
-        #copy-toast {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+        .nav-link.active { 
+            background-color: #0ea5e9; 
+            color: white; 
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); 
         }
+
+        /* Skill Pill Styling */
+        .skill-pill {
+            position: absolute;
+            padding: 0.6rem 1.2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(71, 85, 105, 0.4);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #cbd5e1;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: default;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .skill-pill i { font-size: 1.5rem; }
+        .skill-pill:hover {
+            border-color: #0ea5e9;
+            color: white;
+            z-index: 50;
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
     </style>
 </head>
 
-<body class="antialiased">
-    <canvas id="particle-canvas"></canvas>
+<body class="h-screen flex flex-col bg-dark overflow-hidden relative">
 
-    <!-- Copy Toast Notification -->
-    <div id="copy-toast" class="fixed bottom-10 right-10 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transform translate-y-4">
-        Email copied to clipboard!
-    </div>
-    
-    <div class="content-wrapper">
-        <!-- Welcome Overlay -->
-        <div id="welcome-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950 transition-opacity duration-1000">
-            <div class="text-center p-8 max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-8">Hello there! What's your name?</h2>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <input type="text" id="visitor-name-input" placeholder="Enter your name..." class="bg-slate-800 border-2 border-slate-700 text-white px-4 py-3 rounded-lg w-full sm:w-80 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
-                    <button id="submit-name-button" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                        Let's Go!
-                    </button>
-                </div>
-            </div>
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+    <header class="flex-none w-full py-5 px-6 md:px-12 flex justify-between items-center z-50">
+        <div class="text-2xl font-extrabold tracking-wider text-white">
+            CHINMAY<span class="text-primary">.</span>
         </div>
+        <nav class="hidden md:flex items-center gap-2 p-1.5 bg-slate-900/60 backdrop-blur-md rounded-full border border-slate-800/50 shadow-xl">
+            <button onclick="switchTab('home')" class="nav-link active px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">Home</button>
+            <button onclick="switchTab('about')" class="nav-link px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">About</button>
+            <button onclick="switchTab('skills')" class="nav-link px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">Skills</button>
+            <button onclick="switchTab('projects')" class="nav-link px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">Projects</button>
+            <button onclick="switchTab('resume')" class="nav-link px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">Resume</button>
+            <button onclick="switchTab('contact')" class="nav-link px-5 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:text-white">Contact</button>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-300 p-2"><i data-lucide="menu"></i></button>
+    </header>
 
-        <!-- Header -->
-        <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-nav">
-            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#home" class="text-2xl font-bold tracking-wider text-white hover:text-blue-400 transition-colors">CD.</a>
-                <div class="hidden md:flex items-center space-x-8 text-gray-300">
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
-                    <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
-                </div>
-                <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf" target="_blank" class="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                    View Resume
-                </a>
-                 <button id="mobile-menu-button" class="md:hidden text-white">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </nav>
-             <div id="mobile-menu" class="hidden md:hidden">
-                <a href="#about" class="block py-3 px-4 text-sm text-gray-300 hover:bg-slate-800">About</a>
-                <a href="#skills" class="block py-3 px-4 text-sm text-gray-300 hover:bg-slate-800">Skills</a>
-                <a href="#projects" class="block py-3 px-4 text-sm text-gray-300 hover:bg-slate-800">Projects</a>
-                <a href="#contact" class="block py-3 px-4 text-sm text-gray-300 hover:bg-slate-800">Contact</a>
-                <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf" target="_blank" class="block py-3 px-4 text-sm font-semibold text-blue-400 hover:bg-slate-800">View Resume</a>
-            </div>
-        </header>
+    <div id="mobile-menu" class="fixed inset-0 bg-dark/98 backdrop-blur-xl z-[60] hidden flex-col items-center justify-center space-y-8 text-2xl font-medium">
+        <button onclick="switchTab('home'); toggleMenu()">Home</button>
+        <button onclick="switchTab('about'); toggleMenu()">About</button>
+        <button onclick="switchTab('skills'); toggleMenu()">Skills</button>
+        <button onclick="switchTab('projects'); toggleMenu()">Projects</button>
+        <button onclick="switchTab('resume'); toggleMenu()">Resume</button>
+        <button onclick="switchTab('contact'); toggleMenu()">Contact</button>
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 p-2 text-slate-400"><i data-lucide="x" class="w-8 h-8"></i></button>
+    </div>
 
-        <main class="container mx-auto px-6">
-
-            <!-- Home Section -->
-            <section id="home" class="min-h-screen flex items-center">
-                <div class="max-w-4xl fade-in text-center mx-auto">
-                    <p id="intro-text" class="text-blue-500 font-medium mb-4 text-lg">Hi, my name is</p>
-                    <h1 id="greeting-header" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">Chinmay Deshmukh.</h1>
-                    <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 leading-relaxed">
-                        I'm a final year Data Science student specializing in creating end-to-end Machine Learning solutions. Currently focused on <span id="typed-text" class="text-blue-400 font-semibold"></span>.
-                    </p>
-                    <div class="flex items-center justify-center gap-6">
-                        <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                            View My Work
-                        </a>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/ChinmayDeshmukh13" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-7 h-7"></i></a>
-                            <a href="https://www.linkedin.com/in/chinmaydeshmukh121/" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i data-lucide="linkedin" class="w-7 h-7"></i></a>
+    <main class="flex-grow container mx-auto px-4 pb-6 md:px-0 flex flex-col overflow-hidden">
+        <div class="flex-grow w-full max-w-6xl mx-auto bg-slate-900/40 border border-slate-800/50 rounded-3xl shadow-2xl backdrop-blur-md overflow-hidden relative">
+            
+            <section id="home" class="tab-content active h-full flex items-center justify-center p-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl text-center md:text-left">
+                    <div class="relative flex-shrink-0">
+                        <div class="absolute -inset-4 bg-primary/20 rounded-full blur-2xl animate-pulse"></div>
+                        <img src="https://ui-avatars.com/api/?name=Chinmay+Deshmukh&background=0ea5e9&color=fff&size=256" alt="Profile" class="relative w-48 h-48 md:w-60 md:h-60 rounded-full object-cover border-[6px] border-slate-900 shadow-2xl">
+                    </div>
+                    <div class="space-y-6">
+                        <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight">
+                            Hi, I'm <span class="text-primary">Chinmay</span>
+                        </h1>
+                        <h2 class="text-xl md:text-2xl text-slate-400 font-medium"><span id="typed-text"></span></h2>
+                        <p class="text-slate-400 text-lg leading-relaxed max-w-xl">
+                            Final-year Data Science student building end-to-end Machine Learning solutions and scalable data pipelines.
+                        </p>
+                        <div class="flex gap-4 justify-center md:justify-start">
+                            <button onclick="switchTab('projects')" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-primary/20">View Work</button>
+                            <a href="https://github.com/ChinmayDeshmukh13" target="_blank" class="p-3 bg-slate-800/50 hover:bg-slate-800 rounded-xl border border-slate-700/50 text-slate-300 transition-all"><i data-lucide="github"></i></a>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <div id="about" class="pt-24"></div>
-            <!-- Narrative Flow Sections -->
-            <div class="max-w-4xl mx-auto">
-                <!-- About Section -->
-                <section class="section-line fade-in">
-                    <div class="icon"><i data-lucide="user-2" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">About Me</h2>
-                    <div class="space-y-4 text-slate-400 leading-relaxed">
-                        <p>Hello! I'm Chinmay, a data science student from Amravati, India, with a deep-seated passion for uncovering the narratives hidden within data. My journey into machine learning began with a simple question: "How can we teach machines to predict the future?" This curiosity has since evolved into a dedicated pursuit of engineering intelligent systems that deliver tangible, real-world value.</p>
-                        <p>During my time at Prof Ram Meghe College of Engineering and Management, I've engineered diverse projects, from predictive modeling for agriculture to building BI dashboards for retail analytics. I thrive on the challenge of transforming raw data into robust, production-ready applications and I'm excited by the prospect of leveraging these skills to drive innovation in a professional setting.</p>
+
+            <section id="about" class="tab-content h-full overflow-y-auto p-8 md:p-16">
+                <div class="max-w-3xl mx-auto space-y-8">
+                    <h2 class="text-4xl font-bold text-white flex items-center gap-4"><i data-lucide="user" class="text-primary"></i> About Me</h2>
+                    <div class="text-lg text-slate-400 space-y-6 leading-relaxed">
+                        <p>I'm a Data Science student from Amravati, India. My journey is driven by a deep curiosity for uncovering hidden narratives within complex datasets.</p>
+                        <p>Currently at Prof Ram Meghe College of Engineering, I've specialized in turning raw data into production-ready ML applications, with a focus on agriculture and retail analytics.</p>
                     </div>
-                </section>
-                
-                <!-- Skills Section -->
-                <section id="skills" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="layers-3" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">My Technical Skillset</h2>
+                    <div class="grid grid-cols-2 gap-6 pt-6 text-center">
+                        <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/50">
+                            <span class="text-4xl font-bold text-white">4+</span>
+                            <p class="text-slate-500 uppercase text-xs mt-2 tracking-widest">Years of Tech</p>
+                        </div>
+                        <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/50">
+                            <span class="text-4xl font-bold text-white">5+</span>
+                            <p class="text-slate-500 uppercase text-xs mt-2 tracking-widest">Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="tab-content h-full relative overflow-hidden">
+                <div class="relative z-10 p-8 md:p-16 pointer-events-none text-center">
+                    <h2 class="text-4xl font-bold text-white mb-2">Technical Skills</h2>
+                    <p class="text-slate-500">My core technologies. Hover to focus.</p>
+                </div>
+                <div id="skills-container" class="absolute inset-0 top-32 z-0"></div>
+            </section>
+
+            <section id="projects" class="tab-content h-full overflow-y-auto p-8 md:p-12">
+                <h2 class="text-4xl font-bold text-white mb-12 text-center">Featured Projects</h2>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="group bg-slate-800/40 rounded-3xl overflow-hidden border border-slate-700/50 hover:border-primary transition-all">
+                        <div class="h-48 overflow-hidden"><img src="https://images.pexels.com/photos/220377/pexels-photo-220377.jpeg?auto=compress&w=600" class="w-full h-full object-cover"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Crop Recommendation</h3>
+                            <p class="text-slate-400 text-sm mb-4">ML system predicting optimal crops based on NPK values and climate data.</p>
+                            <div class="flex gap-3">
+                                <a href="https://github.com/ChinmayDeshmukh13/Crop-Recommendation-System" target="_blank" class="flex-1 py-2 bg-slate-700 text-white text-center rounded-lg text-xs hover:bg-white hover:text-dark transition-all">Code</a>
+                                <a href="https://crop-recommendation-system-agup.onrender.com/" target="_blank" class="flex-1 py-2 bg-primary text-white text-center rounded-lg text-xs hover:bg-primary/80 transition-all">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group bg-slate-800/40 rounded-3xl overflow-hidden border border-slate-700/50 hover:border-primary transition-all">
+                        <div class="h-48 overflow-hidden"><img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&w=600" class="w-full h-full object-cover"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Retail Analytics Dashboard</h3>
+                            <p class="text-slate-400 text-sm mb-4">Power BI dashboard for Maven Market analyzing regional sales and customers.</p>
+                            <a href="https://github.com/ChinmayDeshmukh13/Retail-Analytics-Dashboard-Maven-Market" target="_blank" class="block w-full py-2 bg-slate-700 text-white text-center rounded-lg text-xs hover:bg-white hover:text-dark transition-all">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resume" class="tab-content h-full p-6 flex flex-col">
+                <div class="flex justify-between items-center mb-4 max-w-5xl mx-auto w-full">
+                    <h2 class="text-2xl font-bold text-white">Curriculum Vitae</h2>
+                    <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf" download class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> Download PDF</a>
+                </div>
+                <div class="flex-grow w-full max-w-5xl mx-auto bg-slate-800 rounded-2xl overflow-hidden shadow-inner">
+                    <iframe src="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf&embedded=true" class="w-full h-full" frameborder="0"></iframe>
+                </div>
+            </section>
+
+            <section id="contact" class="tab-content h-full overflow-y-auto p-8 md:p-16">
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
                     <div class="space-y-6">
-                        <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">Data Analysis & Visualization</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag px-4 py-2 rounded-md">SQL</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Excel</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Power BI</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Tableau</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Pandas & NumPy</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Matplotlib & Seaborn</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Statistical Analysis</span>
+                        <h2 class="text-4xl font-bold text-white mb-6">Let's Talk</h2>
+                        <p class="text-slate-400 text-lg">I'm currently seeking new opportunities. My inbox is always open!</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-slate-800/30 rounded-2xl border border-slate-700/50">
+                                <div class="p-3 bg-primary/10 text-primary rounded-xl"><i data-lucide="mail"></i></div>
+                                <div><p class="text-xs text-slate-500 uppercase">Email Me</p><p class="text-white">chinmay.d@email.com</p></div>
                             </div>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">Machine Learning & Programming</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag px-4 py-2 rounded-md">Python</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Scikit-learn</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Feature Engineering</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">TensorFlow / Keras</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">PyTorch</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">NLP (NLTK, spaCy)</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">XGBoost & LightGBM</span>
-                            </div>
-                        </div>
-                         <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">MLOps & Cloud Deployment</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag px-4 py-2 rounded-md">Docker</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Git & GitHub Actions</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">GCP & AWS</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Kubernetes</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Streamlit & Flask</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">CI/CD Pipelines</span>
+                            <div class="flex items-center gap-4 p-4 bg-slate-800/30 rounded-2xl border border-slate-700/50">
+                                <div class="p-3 bg-blue-600/10 text-blue-600 rounded-xl"><i data-lucide="linkedin"></i></div>
+                                <div><p class="text-xs text-slate-500 uppercase">LinkedIn</p><a href="https://www.linkedin.com/in/chinmaydeshmukh121/" target="_blank" class="text-white hover:text-primary transition-colors">Chinmay Deshmukh</a></div>
                             </div>
                         </div>
                     </div>
-                </section>
-                
-                <!-- Projects Section -->
-                <section id="projects" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="folder-git-2" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">Featured Projects</h2>
-                    <div class="space-y-12">
-                         <!-- Project 1 -->
-                        <div id="project-1" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-                            <img src="https://images.pexels.com/photos/220377/pexels-photo-220377.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Crop Recommendation System" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 id="project-title-1" class="text-xl font-bold mb-2 text-white">Crop Recommendation System</h3>
-                                <p id="project-desc-1" class="text-slate-400 mb-4 flex-grow">Built a system that recommends optimal crops based on environmental factors like soil, temperature, and rainfall to maximize farm yield.</p>
-                                <div class="flex items-center justify-between mt-auto">
-                                    <button onclick="generateProjectDetails(1)" class="gemini-btn inline-flex items-center gap-2 bg-purple-900/50 hover:bg-purple-900 text-purple-300 font-semibold py-2 px-3 text-sm rounded-lg transition-colors">
-                                        ✨ AI Details
-                                    </button>
-                                    <div class="flex items-center gap-4">
-                                        <a href="https://github.com/ChinmayDeshmukh13/Crop-Recommendation-System" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                        <a href="https://crop-recommendation-system-agup.onrender.com/" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="external-link" class="w-5 h-5"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Project 2 -->
-                        <div id="project-2" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Maven Market Analytics Dashboard" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 id="project-title-2" class="text-xl font-bold mb-2 text-white">Maven Market Analytics Dashboard</h3>
-                                <p id="project-desc-2" class="text-slate-400 mb-4 flex-grow">Engineered an interactive Power BI dashboard to analyze the Maven Market dataset, visualizing key metrics for actionable business insights.</p>
-                                <div class="flex items-center justify-between mt-auto">
-                                    <button onclick="generateProjectDetails(2)" class="gemini-btn inline-flex items-center gap-2 bg-purple-900/50 hover:bg-purple-900 text-purple-300 font-semibold py-2 px-3 text-sm rounded-lg transition-colors">
-                                        ✨ AI Details
-                                    </button>
-                                    <div class="flex items-center gap-4">
-                                        <a href="https://github.com/ChinmayDeshmukh13/Retail-Analytics-Dashboard-Maven-Market" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                        <a href="https://app.powerbi.com/view?r=eyJrIjoiMzNhYzAwNzQtN2YyNi00Y2I2LTlkY2EtODg5OGU1Y2ZhYzBjIiwidCI6IjA3NTIzZTJlLTQ2ZWItNGNiZS04Mzc1LTEzZDU0YmFhOWRmZiJ9&pageName=347b14a4c7881d49d427" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="external-link" class="w-5 h-5"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                 <!-- Contact Section -->
-                <section id="contact" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="send" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">Get In Touch</h2>
-                     <p class="text-slate-400 mb-8 max-w-2xl">
-                        I'm actively seeking new opportunities and collaborations. My inbox is always open, so whether you have a question, a project idea, or just want to connect, I'll get back to you promptly!
-                    </p>
-                    <div class="flex flex-wrap gap-4 items-center">
-                        <a href="mailto:chinmay.d@email.com" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                             Say Hello
-                        </a>
-                        <button id="copy-email-button" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-3 px-6 rounded-lg transition-colors">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copy Email
-                        </button>
-                    </div>
-                </section>
-            </div>
-        </main>
+                    <form class="space-y-4 bg-slate-800/20 p-6 rounded-3xl border border-slate-700/50" onsubmit="event.preventDefault(); alert('Demo only!')">
+                        <input type="text" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-all" placeholder="Name">
+                        <input type="email" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-all" placeholder="Email">
+                        <textarea rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-primary transition-all resize-none" placeholder="Message"></textarea>
+                        <button class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[0.98] transition-all">Send</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="text-center py-10 text-slate-500">
-            <p>Designed & Built by Chinmay Deshmukh &copy; 2025</p>
-        </footer>
-    </div>
+    <footer class="flex-none py-4 text-center text-slate-600 text-xs">
+        © 2025 Chinmay Deshmukh.
+    </footer>
 
-    <script type="module">
-        // --- Configs ---
-        const firebaseConfig = {
-          apiKey: "AIzaSyDR6UYgIJrFCD3BrQg9IBiE58_EmJbqui0",
-          authDomain: "portfolio-82fd5.firebaseapp.com",
-          projectId: "portfolio-82fd5",
-          storageBucket: "portfolio-82fd5.firebasestorage.app",
-          messagingSenderId: "758286271005",
-          appId: "1:758286271005:web:64a73aa923e469048d3cf4",
-          measurementId: "G-VG4CVST2BE"
-        };
-        const API_KEY = "AIzaSyDOvZe-4UkYpyJCal0Dx87CKVp8NoPP8r8";
-        const MY_EMAIL = "chinmay.d@email.com"; // Your actual email address
-
-        // --- Setup ---
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
         lucide.createIcons();
-        
-        // --- Background Animation ---
-        // This logic remains the same
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        const particlesGeometry = new THREE.BufferGeometry;
-        const particlesCnt = 5000;
-        const posArray = new Float32Array(particlesCnt * 3);
-        for(let i = 0; i < particlesCnt * 3; i++) { posArray[i] = (Math.random() - 0.5) * 5; }
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({ size: 0.005, color: 0x3b82f6 });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 2;
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (event) => { mouseX = event.clientX; mouseY = event.clientY; });
-        const clock = new THREE.Clock();
-        const animate = () => {
-            const elapsedTime = clock.getElapsedTime();
-            particlesMesh.rotation.y = -0.1 * elapsedTime;
-            if (mouseX > 0) {
-                particlesMesh.rotation.x = -mouseY * (elapsedTime * 0.00008);
-                particlesMesh.rotation.y = mouseX * (elapsedTime * 0.00008);
-            }
-            renderer.render(scene, camera);
-            window.requestAnimationFrame(animate);
-        };
-        animate();
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        });
-
-        // --- Scroll Animations ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.2 });
-        document.querySelectorAll('.fade-in').forEach((el) => { observer.observe(el); });
-
-        // --- Welcome & Firebase ---
-        // This logic remains the same
-        const welcomeOverlay = document.getElementById('welcome-overlay');
-        const nameInput = document.getElementById('visitor-name-input');
-        const submitButton = document.getElementById('submit-name-button');
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        let db;
-        try {
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            const auth = getAuth(app);
-            await signInAnonymously(auth);
-        } catch (e) { console.error("Firebase init failed.", e); }
-
-        const proceedToSite = (visitorName) => {
-            if (visitorName) {
-                const introText = document.getElementById('intro-text');
-                const greetingHeader = document.getElementById('greeting-header');
-                if (introText && greetingHeader) {
-                    introText.style.display = 'none'; // Hide the original intro
-                    greetingHeader.innerHTML = `Hi <span class="text-blue-500">${visitorName}</span>! I'm Chinmay.`;
-                }
-            }
-            welcomeOverlay.style.opacity = '0';
-            setTimeout(() => { welcomeOverlay.style.display = 'none'; }, 1000);
-        };
-
-        const handleSubmitName = async () => {
-            const visitorName = nameInput.value.trim();
-            if (!visitorName) { proceedToSite(null); return; }
-            submitButton.disabled = true;
-            submitButton.textContent = 'Welcome!';
-            try {
-                if (db) {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    await addDoc(collection(db, `/artifacts/${appId}/public/data/visitors`), { name: visitorName, timestamp: serverTimestamp() });
-                }
-            } catch (error) { console.error("Error saving name:", error); }
-            finally { proceedToSite(visitorName); }
-        };
-        submitButton.addEventListener('click', handleSubmitName);
-        nameInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') handleSubmitName(); });
-
-        // --- Mobile Menu ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
-        document.querySelectorAll('#mobile-menu a').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.add('hidden')); });
-
-        // --- Typed.js ---
         new Typed('#typed-text', {
-            strings: ['Deep Learning models.', 'scalable data pipelines.', 'interactive dashboards.', 'end-to-end ML solutions.'],
-            typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
+            strings: ['Data Scientist', 'Machine Learning Engineer', 'Data Analyst'],
+            typeSpeed: 50, backSpeed: 30, loop: true
         });
 
-        // --- Copy Email Logic ---
-        const copyEmailButton = document.getElementById('copy-email-button');
-        const copyToast = document.getElementById('copy-toast');
-        copyEmailButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(MY_EMAIL).then(() => {
-                copyToast.classList.remove('opacity-0', 'translate-y-4');
-                setTimeout(() => {
-                    copyToast.classList.add('opacity-0', 'translate-y-4');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy email: ', err);
+        function switchTab(id) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 400);
             });
-        });
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
 
-        // --- Gemini API Call ---
-        // This logic remains the same
-        async function callGeminiWithExponentialBackoff(prompt) {
-            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
-            const payload = { contents: [{ parts: [{ text: prompt }] }] };
-            for (let i = 0, delay = 1000; i < 3; i++, delay *= 2) {
-                try {
-                    const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                    if (response.ok) {
-                        const result = await response.json();
-                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                        if (text) return text;
-                        throw new Error("Invalid API response.");
-                    }
-                    if (response.status !== 429 && response.status < 500) throw new Error(`API Error: ${response.statusText}`);
-                } catch (e) { if (i === 2) throw e; }
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
-            throw new Error("API call failed after retries.");
+            const target = document.getElementById(id);
+            target.style.display = (id === 'home' || id === 'resume' || id === 'about') ? 'flex' : 'block';
+            if (id === 'about' || id === 'contact' || id === 'projects') target.style.display = 'block';
+
+            setTimeout(() => target.classList.add('active'), 10);
+            document.querySelector(`[onclick*="'${id}'"]`).classList.add('active');
+            if (id === 'skills') initSkills();
         }
 
-        window.generateProjectDetails = async function(projectId) {
-            const card = document.getElementById(`project-${projectId}`);
-            const title = card.querySelector('h3').innerText;
-            const descEl = card.querySelector('p');
-            const button = card.querySelector('.gemini-btn');
-            const originalText = descEl.innerText;
-            const originalButtonHTML = button.innerHTML;
+        const toggleMenu = () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden'); menu.classList.toggle('flex');
+        };
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMenu);
 
-            button.disabled = true;
-            button.innerHTML = `<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>`;
+        // SKILLS PHYSICS ENGINE
+        const skillsData = [
+            { name: "Python", icon: "devicon-python-plain colored" },
+            { name: "TensorFlow", icon: "devicon-tensorflow-original colored" },
+            { name: "SQL", icon: "devicon-postgresql-plain colored" },
+            { name: "Docker", icon: "devicon-docker-plain colored" },
+            { name: "Git", icon: "devicon-git-plain colored" },
+            { name: "Pandas", icon: "devicon-pandas-plain text-slate-200" },
+            { name: "Flask", icon: "devicon-flask-original text-slate-200" },
+            { name: "NumPy", icon: "devicon-numpy-plain colored" },
+            { name: "AWS", icon: "devicon-amazonwebservices-plain-wordmark colored" },
+            { name: "React", icon: "devicon-react-original colored" }
+        ];
+
+        let bubbles = [];
+        let isSkillsInit = false;
+
+        function initSkills() {
+            if (isSkillsInit) return;
+            isSkillsInit = true;
+            const container = document.getElementById('skills-container');
+            const rect = container.getBoundingClientRect();
             
-            const prompt = `Elaborate on this project for a portfolio in one concise, professional paragraph (3-4 sentences). Title: "${title}", Description: "${originalText}". Highlight the goal, technical approach, and skills shown.`;
+            skillsData.forEach((s, i) => {
+                const pill = document.createElement('div');
+                pill.className = 'skill-pill';
+                pill.innerHTML = `<i class="${s.icon}"></i><span>${s.name}</span>`;
+                container.appendChild(pill);
 
-            try {
-                descEl.innerText = await callGeminiWithExponentialBackoff(prompt);
-            } catch (error) {
-                descEl.innerText = "Sorry, details could not be generated. Please try again later.";
-                console.error("Gemini API call failed:", error);
-                setTimeout(() => { descEl.innerText = originalText; }, 3000);
-            } finally {
-                button.disabled = false;
-                button.innerHTML = originalButtonHTML;
-            }
+                let x = Math.random() * (rect.width - 150);
+                let y = Math.random() * (rect.height - 60);
+                let dx = (Math.random() - 0.5) * 0.8;
+                let dy = (Math.random() - 0.5) * 0.8;
+
+                pill.addEventListener('mouseenter', () => pill.dataset.hover = "true");
+                pill.addEventListener('mouseleave', () => pill.dataset.hover = "false");
+                bubbles.push({ el: pill, x, y, dx, dy });
+            });
+            animate();
+        }
+
+        function animate() {
+            const container = document.getElementById('skills-container');
+            if (container.offsetHeight === 0) { requestAnimationFrame(animate); return; }
+            const rect = container.getBoundingClientRect();
+
+            bubbles.forEach(b => {
+                if (b.el.dataset.hover === "true") return;
+                b.x += b.dx; b.y += b.dy;
+                if (b.x <= 0 || b.x + b.el.offsetWidth >= rect.width) b.dx *= -1;
+                if (b.y <= 0 || b.y + b.el.offsetHeight >= rect.height) b.dy *= -1;
+                b.el.style.transform = `translate(${b.x}px, ${b.y}px)`;
+            });
+            requestAnimationFrame(animate);
         }
     </script>
 </body>
-
 </html>
-
-
