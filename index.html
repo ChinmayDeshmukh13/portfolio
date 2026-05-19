@@ -2,52 +2,53 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VG4CVST2BE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VG4CVST2BE');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinmay Deshmukh | Data Scientist Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chinmay Deshmukh | Portfolio</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #020617; /* Slate 950 */
-            color: #d1d5db; /* Gray 300 */
+            background: #020617;
+            color: #d1d5db;
         }
+
         #particle-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             opacity: 0.5;
         }
+
         .content-wrapper {
             position: relative;
             z-index: 1;
         }
+
         .glass-nav {
-            background: rgba(3, 7, 18, 0.6);
+            background: rgba(3, 7, 18, 0.65);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .section-line {
             position: relative;
             padding-left: 40px;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
+
         .section-line::before {
             content: '';
             position: absolute;
@@ -55,8 +56,9 @@
             top: 8px;
             bottom: 8px;
             width: 2px;
-            background-color: #1e293b; /* Slate 800 */
+            background-color: #1e293b;
         }
+
         .section-line .icon {
             position: absolute;
             left: 0;
@@ -65,348 +67,516 @@
             height: 24px;
             background-color: #020617;
             border: 2px solid #3b82f6;
-            border-radius: 50%;
+            border-radius: 9999px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .project-card {
-            background: #0f172a; /* Slate 900 */
-            border: 1px solid #1e293b; /* Slate 800 */
-            transition: all 0.3s ease-in-out;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            transition: all 0.3s ease;
         }
+
         .project-card:hover {
             transform: translateY(-8px);
             border-color: #3b82f6;
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
+
         .skill-tag {
-            background-color: #1e293b; /* Slate 800 */
-            border: 1px solid transparent;
+            background-color: #1e293b;
             transition: all 0.2s ease;
         }
+
         .skill-tag:hover {
             border-color: #3b82f6;
-            color: #eff6ff; /* Blue 50 */
+            color: white;
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.8s ease;
         }
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         #copy-toast {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 
 <body class="antialiased">
+
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Copy Toast Notification -->
-    <div id="copy-toast" class="fixed bottom-10 right-10 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transform translate-y-4">
+    <div id="copy-toast"
+        class="fixed bottom-10 right-10 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 translate-y-4">
         Email copied to clipboard!
     </div>
-    
+
     <div class="content-wrapper">
-        <!-- Header -->
-        <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-nav">
+
+        <!-- HEADER -->
+        <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#home" class="text-2xl font-bold tracking-wider text-white hover:text-blue-400 transition-colors">CD.</a>
+
+                <a href="#home"
+                    class="text-2xl font-bold tracking-wider text-white hover:text-blue-400 transition-colors">
+                    CD.
+                </a>
+
                 <div class="hidden md:flex items-center space-x-8 text-gray-300">
                     <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
                     <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
                     <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
                 </div>
-                <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf" target="_blank" class="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+
+                <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/main/Chinmay_Deshmukh_resume.pdf"
+                    target="_blank"
+                    class="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all">
                     View Resume
                 </a>
-                 <button id="mobile-menu-button" class="md:hidden text-white">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
+
             </nav>
-             <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-slate-950/95 backdrop-blur-xl border-b border-white/5">
-                <a href="#about" class="block py-4 px-6 text-sm text-gray-300 hover:bg-slate-800">About</a>
-                <a href="#skills" class="block py-4 px-6 text-sm text-gray-300 hover:bg-slate-800">Skills</a>
-                <a href="#projects" class="block py-4 px-6 text-sm text-gray-300 hover:bg-slate-800">Projects</a>
-                <a href="#contact" class="block py-4 px-6 text-sm text-gray-300 hover:bg-slate-800">Contact</a>
-                <a href="https://raw.githubusercontent.com/ChinmayDeshmukh13/portfolio/d65f3494ca2e4afb690701a47647a6fdd96ee311/Chinmay_Deshmukh_resume.pdf" target="_blank" class="block py-4 px-6 text-sm font-semibold text-blue-400 hover:bg-slate-800">View Resume</a>
-            </div>
         </header>
 
         <main class="container mx-auto px-6">
 
-            <!-- Home Section -->
+            <!-- HOME -->
             <section id="home" class="min-h-screen flex items-center">
+
                 <div class="max-w-4xl fade-in text-center mx-auto">
-                    <p class="text-blue-500 font-medium mb-4 text-lg">Hi, my name is</p>
-                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">Chinmay Deshmukh.</h1>
-                    <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 leading-relaxed">
-                        I'm a final year Data Science student specializing in creating end-to-end Machine Learning solutions. Currently focused on <span id="typed-text" class="text-blue-400 font-semibold"></span>.
+
+                    <p class="text-blue-500 font-medium mb-4 text-lg">
+                        Hi, my name is
                     </p>
+
+                    <h1
+                        class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">
+                        Chinmay Deshmukh.
+                    </h1>
+
+                    <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-10 leading-relaxed">
+                        I'm a final year Computer Science & Data Science undergraduate focused on building scalable AI,
+                        analytics, and software solutions.
+                        Currently working on
+                        <span id="typed-text" class="text-blue-400 font-semibold"></span>
+                    </p>
+
                     <div class="flex items-center justify-center gap-6">
-                        <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+
+                        <a href="#projects"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all">
                             View My Work
                         </a>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/ChinmayDeshmukh13" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-7 h-7"></i></a>
-                            <a href="https://www.linkedin.com/in/chinmaydeshmukh121/" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i data-lucide="linkedin" class="w-7 h-7"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <div id="about" class="pt-24"></div>
-            <!-- Narrative Flow Sections -->
-            <div class="max-w-4xl mx-auto">
-                <!-- About Section -->
-                <section class="section-line fade-in">
-                    <div class="icon"><i data-lucide="user-2" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">About Me</h2>
-                    <div class="space-y-4 text-slate-400 leading-relaxed">
-                        <p>
-I'm a Computer Science and Engineering (Data Science) undergraduate focused on building practical machine learning systems, analytics dashboards, and intelligent applications. I enjoy transforming raw data into scalable solutions using Python, SQL, machine learning, and visualization tools.
-</p>
 
-<p>
-My work spans predictive analytics, computer vision, financial monitoring systems, and business intelligence dashboards. I’m actively exploring software engineering, data science, and AI-driven development while building production-oriented projects that solve real-world problems.
-</p>
-                    </div>
-                </section>
-                
-                <!-- Skills Section -->
-                <section id="skills" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="layers-3" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">My Technical Skillset</h2>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">Data Analysis & Visualization</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <span class="skill-tag px-4 py-2 rounded-md">SQL</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Excel</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Power BI</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Tableau</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Pandas & NumPy</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Matplotlib & Seaborn</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Statistical Analysis</span>
-                            </div>
+                        <div class="flex space-x-4">
+
+                            <a href="https://github.com/ChinmayDeshmukh13" target="_blank"
+                                class="text-slate-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="github" class="w-7 h-7"></i>
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/chinmaydeshmukh121/" target="_blank"
+                                class="text-slate-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="linkedin" class="w-7 h-7"></i>
+                            </a>
+
                         </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <div id="about" class="pt-24"></div>
+
+            <div class="max-w-6xl mx-auto">
+
+                <!-- ABOUT -->
+                <section class="section-line fade-in">
+
+                    <div class="icon">
+                        <i data-lucide="user-2" class="w-4 h-4 text-blue-500"></i>
+                    </div>
+
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        About Me
+                    </h2>
+
+                    <div class="space-y-4 text-slate-400 leading-relaxed">
+
+                        <p>
+                            I'm a Computer Science and Engineering (Data Science) undergraduate focused on building
+                            practical machine learning systems, analytics dashboards, and intelligent applications.
+                            I enjoy transforming raw data into scalable solutions using Python, SQL, machine learning,
+                            and visualization tools.
+                        </p>
+
+                        <p>
+                            My work spans predictive analytics, computer vision, financial monitoring systems, and
+                            business intelligence dashboards. I’m actively exploring software engineering, data science,
+                            and AI-driven development while building production-oriented projects that solve real-world
+                            problems.
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- SKILLS -->
+                <section id="skills" class="section-line fade-in">
+
+                    <div class="icon">
+                        <i data-lucide="layers-3" class="w-4 h-4 text-blue-500"></i>
+                    </div>
+
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        Technical Skills
+                    </h2>
+
+                    <div class="space-y-6">
+
                         <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">Machine Learning & Programming</h3>
+
+                            <h3 class="font-semibold text-lg text-slate-300 mb-3">
+                                Programming & Development
+                            </h3>
+
                             <div class="flex flex-wrap gap-3">
+
                                 <span class="skill-tag px-4 py-2 rounded-md">Python</span>
                                 <span class="skill-tag px-4 py-2 rounded-md">Java</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Machine Learning</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Data Structures & Algorithm</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Scikit-learn</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Feature Engineering</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">XGBoost & LightGBM</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">SQL</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">JavaScript</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">HTML/CSS</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Data Structures & Algorithms</span>
+
                             </div>
+
                         </div>
-                         <div>
-                            <h3 class="font-semibold text-lg text-slate-300 mb-3">Tools</h3>
+
+                        <div>
+
+                            <h3 class="font-semibold text-lg text-slate-300 mb-3">
+                                Data Science & Machine Learning
+                            </h3>
+
                             <div class="flex flex-wrap gap-3">
+
+                                <span class="skill-tag px-4 py-2 rounded-md">Machine Learning</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Scikit-learn</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Pandas</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">NumPy</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">OpenCV</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Feature Engineering</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Statistical Analysis</span>
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold text-lg text-slate-300 mb-3">
+                                Visualization & Tools
+                            </h3>
+
+                            <div class="flex flex-wrap gap-3">
+
+                                <span class="skill-tag px-4 py-2 rounded-md">Power BI</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Excel</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Streamlit</span>
                                 <span class="skill-tag px-4 py-2 rounded-md">Docker</span>
-                                <span class="skill-tag px-4 py-2 rounded-md">Git & GitHub Actions</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">Git</span>
+                                <span class="skill-tag px-4 py-2 rounded-md">GitHub</span>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </section>
-                
-                <!-- Projects Section -->
+
+                <!-- PROJECTS -->
                 <section id="projects" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="folder-git-2" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">Featured Projects</h2>
-                    <div class="space-y-12">
-                         <!-- Project 1 -->
-                        <div id="project-1" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-                            <img src="https://images.pexels.com/photos/220377/pexels-photo-220377.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Crop Recommendation System" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 id="project-title-1" class="text-xl font-bold mb-2 text-white">Crop Recommendation System</h3>
-                                <p id="project-desc-1" class="text-slate-400 mb-4 flex-grow">Built a system that recommends optimal crops based on environmental factors like soil, temperature, and rainfall to maximize farm yield.</p>
-                                <div class="flex items-center justify-between mt-auto">
-                                    <button onclick="generateProjectDetails(1)" class="gemini-btn inline-flex items-center gap-2 bg-purple-900/50 hover:bg-purple-900 text-purple-300 font-semibold py-2 px-3 text-sm rounded-lg transition-colors">
-                                        ✨ AI Details
-                                    </button>
-                                    <div class="flex items-center gap-4">
-                                        <a href="https://github.com/ChinmayDeshmukh13/Crop-Recommendation-System" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                        <a href="https://crop-recommendation-system-agup.onrender.com/" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="external-link" class="w-5 h-5"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Project 2 -->
-                        <div id="project-2" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Maven Market Analytics Dashboard" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 id="project-title-2" class="text-xl font-bold mb-2 text-white">Maven Market Analytics Dashboard</h3>
-                                <p id="project-desc-2" class="text-slate-400 mb-4 flex-grow">Engineered an interactive Power BI dashboard to analyze the Maven Market dataset, visualizing key metrics for actionable business insights.</p>
-                                <div class="flex items-center justify-between mt-auto">
-                                    <button onclick="generateProjectDetails(2)" class="gemini-btn inline-flex items-center gap-2 bg-purple-900/50 hover:bg-purple-900 text-purple-300 font-semibold py-2 px-3 text-sm rounded-lg transition-colors">
-                                        ✨ AI Details
-                                    </button>
-                                    <div class="flex items-center gap-4">
-                                        <a href="https://github.com/ChinmayDeshmukh13/Retail-Analytics-Dashboard-Maven-Market" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="github" class="w-5 h-5"></i></a>
-                                        <a href="https://app.powerbi.com/view?r=eyJrIjoiMzNhYzAwNzQtN2YyNi00Y2I2LTlkY2EtODg5OGU1Y2ZhYzBjIiwidCI6IjA3NTIzZTJlLTQ2ZWItNGNiZS04Mzc1LTEzZDU0YmFhOWRmZiJ9&pageName=347b14a4c7881d49d427" target="_blank" class="text-slate-400 hover:text-blue-400"><i data-lucide="external-link" class="w-5 h-5"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Project 3 -->
-<div id="project-3" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-    <img src="https://images.pexels.com/photos/60626/security-protection-anti-virus-software-60626.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Criminal Identification System" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
 
-    <div class="p-6 flex flex-col flex-grow">
-        <h3 class="text-xl font-bold mb-2 text-white">
-            Criminal Identification System
-        </h3>
-
-        <p class="text-slate-400 mb-4 flex-grow">
-            Developed an AI-powered criminal identification system using Python and computer vision techniques to automate suspect recognition and streamline law enforcement workflows.
-        </p>
-
-        <div class="flex flex-wrap gap-2 mb-4">
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Python</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">OpenCV</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Machine Learning</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Computer Vision</span>
-        </div>
-
-        <div class="flex items-center gap-4 mt-auto">
-            <a href="https://github.com/ChinmayDeshmukh13/Criminal-Identification-System"
-               target="_blank"
-               class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg transition-all">
-                GitHub
-            </a>
-
-            <a href="#"
-               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all">
-                Live Demo
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- Project 4 -->
-<div id="project-4" class="project-card rounded-lg overflow-hidden flex flex-col md:flex-row group">
-    <img src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Real-Time Risk Monitor" class="w-full md:w-1/3 h-48 md:h-auto object-cover">
-
-    <div class="p-6 flex flex-col flex-grow">
-        <h3 class="text-xl font-bold mb-2 text-white">
-            Real-Time Risk Monitor
-        </h3>
-
-        <p class="text-slate-400 mb-4 flex-grow">
-            Built a real-time financial risk monitoring platform that tracks market volatility, analyzes stock movements, and visualizes live risk metrics through an interactive dashboard.
-        </p>
-
-        <div class="flex flex-wrap gap-2 mb-4">
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Python</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Streamlit</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Docker</span>
-            <span class="skill-tag px-3 py-1 rounded-md text-sm">Financial Analytics</span>
-        </div>
-
-        <div class="flex items-center gap-4 mt-auto">
-            <a href="https://github.com/ChinmayDeshmukh13/risk-monitor"
-               target="_blank"
-               class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg transition-all">
-                GitHub
-            </a>
-
-            <a href="#"
-               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all">
-                Live Demo
-            </a>
-        </div>
-    </div>
-</div>
+                    <div class="icon">
+                        <i data-lucide="folder-git-2" class="w-4 h-4 text-blue-500"></i>
                     </div>
+
+                    <h2 class="text-3xl font-bold text-white mb-8">
+                        Featured Projects
+                    </h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                        <!-- PROJECT 1 -->
+                        <div class="project-card rounded-xl overflow-hidden flex flex-col h-full">
+
+                            <img src="https://images.pexels.com/photos/220377/pexels-photo-220377.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-grow">
+
+                                <h3 class="text-2xl font-bold text-white mb-3">
+                                    Crop Recommendation System
+                                </h3>
+
+                                <p class="text-slate-400 mb-5 leading-relaxed flex-grow">
+                                    Built a machine learning-based recommendation system that predicts the most suitable
+                                    crops using soil nutrients, rainfall, humidity, and temperature data. Implemented
+                                    data preprocessing, feature engineering, and classification models to improve
+                                    agricultural decision-making and optimize crop yield prediction accuracy.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Python</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Machine Learning</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Scikit-learn</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Data Analysis</span>
+                                </div>
+
+                                <div class="flex gap-4 mt-auto">
+
+                                    <a href="https://github.com/ChinmayDeshmukh13/Crop-Recommendation-System"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        GitHub
+                                    </a>
+
+                                    <a href="https://crop-recommendation-system-agup.onrender.com/"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        Live Demo
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PROJECT 2 -->
+                        <div class="project-card rounded-xl overflow-hidden flex flex-col h-full">
+
+                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-grow">
+
+                                <h3 class="text-2xl font-bold text-white mb-3">
+                                    Maven Market Analytics Dashboard
+                                </h3>
+
+                                <p class="text-slate-400 mb-5 leading-relaxed flex-grow">
+                                    Designed an interactive Power BI dashboard for retail sales analytics, enabling
+                                    visualization of revenue trends, customer behavior, product performance, and
+                                    regional sales KPIs. Improved business reporting efficiency through dynamic
+                                    filtering and data-driven insights.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Power BI</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">SQL</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Excel</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Data Visualization</span>
+                                </div>
+
+                                <div class="flex gap-4 mt-auto">
+
+                                    <a href="https://github.com/ChinmayDeshmukh13/Retail-Analytics-Dashboard-Maven-Market"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        GitHub
+                                    </a>
+
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMzNhYzAwNzQtN2YyNi00Y2I2LTlkY2EtODg5OGU1Y2ZhYzBjIiwidCI6IjA3NTIzZTJlLTQ2ZWItNGNiZS04Mzc1LTEzZDU0YmFhOWRmZiJ9&pageName=347b14a4c7881d49d427"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        Live Demo
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PROJECT 3 -->
+                        <div class="project-card rounded-xl overflow-hidden flex flex-col h-full">
+
+                            <img src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-grow">
+
+                                <h3 class="text-2xl font-bold text-white mb-3">
+                                    Real-Time Risk Monitor
+                                </h3>
+
+                                <p class="text-slate-400 mb-5 leading-relaxed flex-grow">
+                                    Developed a real-time financial risk monitoring application that tracks stock
+                                    volatility, market fluctuations, and live trading metrics using interactive
+                                    dashboards. Integrated real-time market data processing and containerized
+                                    deployment workflows for scalable monitoring.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Python</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Streamlit</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Docker</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">Financial Analytics</span>
+                                </div>
+
+                                <div class="flex gap-4 mt-auto">
+
+                                    <a href="https://github.com/ChinmayDeshmukh13/risk-monitor"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        GitHub
+                                    </a>
+
+                                    <a href="#"
+                                        class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        Live Demo
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PROJECT 4 -->
+                        <div class="project-card rounded-xl overflow-hidden flex flex-col h-full">
+
+                            <img src="https://images.pexels.com/photos/8728382/pexels-photo-8728382.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-grow">
+
+                                <h3 class="text-2xl font-bold text-white mb-3">
+                                    Interactive AR Labs to Enhance Learning Outcomes
+                                </h3>
+
+                                <p class="text-slate-400 mb-5 leading-relaxed flex-grow">
+                                    Developed an interactive Augmented Reality learning platform designed to improve
+                                    student engagement and concept visualization through immersive 3D educational
+                                    experiences. Built responsive AR interfaces and optimized real-time rendering for
+                                    smooth browser-based interaction across devices.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 mb-5">
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">JavaScript</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">AR.js</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">WebXR</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">HTML/CSS</span>
+                                    <span class="skill-tag px-3 py-1 rounded-md text-sm">3D Interaction</span>
+                                </div>
+
+                                <div class="flex gap-4 mt-auto">
+
+                                    <a href="https://github.com/ChinmayDeshmukh13/Interactive-AR-Labs-to-Enhance-Learning-Outcomes"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        GitHub
+                                    </a>
+
+                                    <a href="https://ar-elv9bz2mw-chinmaydeshmukh016-5602s-projects.vercel.app/"
+                                        target="_blank"
+                                        class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all">
+                                        Live Demo
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </section>
-                
-                 <!-- Contact Section -->
+
+                <!-- CONTACT -->
                 <section id="contact" class="section-line fade-in">
-                    <div class="icon"><i data-lucide="send" class="w-4 h-4 text-blue-500"></i></div>
-                    <h2 class="text-3xl font-bold text-white mb-6">Get In Touch</h2>
-                     <p class="text-slate-400 mb-8 max-w-2xl">
-                        I'm actively seeking new opportunities and collaborations. My inbox is always open, so whether you have a question, a project idea, or just want to connect, I'll get back to you promptly!
-                    </p>
-                    <div class="flex flex-wrap gap-4 items-center">
-                        <a href="mailto:chinmaydeshmukh016@email.com" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all transform hover:scale-105">
-                             Say Hello
-                        </a>
-                        <button id="copy-email-button" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-3 px-6 rounded-lg transition-colors">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copy Email
-                        </button>
+
+                    <div class="icon">
+                        <i data-lucide="send" class="w-4 h-4 text-blue-500"></i>
                     </div>
+
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        Get In Touch
+                    </h2>
+
+                    <p class="text-slate-400 mb-8 max-w-2xl">
+                        I'm actively seeking opportunities in Software Engineering, Data Science, and AI-driven
+                        development. Feel free to connect for collaborations, internships, or project discussions.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 items-center">
+
+                        <a href="mailto:your-email@example.com"
+                            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                            Say Hello
+                        </a>
+
+                        <button id="copy-email-button"
+                            class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-3 px-6 rounded-lg transition-colors">
+
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                            Copy Email
+
+                        </button>
+
+                    </div>
+
                 </section>
+
             </div>
+
         </main>
 
-        <!-- Footer -->
         <footer class="text-center py-10 text-slate-500 border-t border-white/5">
-            <p>Designed & Built by Chinmay Deshmukh &copy; 2025</p>
+            <p>
+                Designed & Built by Chinmay Deshmukh © 2026
+            </p>
         </footer>
+
     </div>
 
-    <script type="module">
-        // --- Setup ---
+    <script>
+
         lucide.createIcons();
-        
-        // --- Background Animation ---
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('particle-canvas'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
 
-        const particlesGeometry = new THREE.BufferGeometry;
-        const particlesCnt = 5000;
-        const posArray = new Float32Array(particlesCnt * 3);
-
-        for(let i = 0; i < particlesCnt * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 5;
-        }
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: 0x3b82f6
-        });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 2;
-
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (event) => {
-            mouseX = event.clientX;
-            mouseY = event.clientY;
+        // Typed JS
+        new Typed('#typed-text', {
+            strings: [
+                'Machine Learning Applications.',
+                'Interactive Data Dashboards.',
+                'Computer Vision Systems.',
+                'Real-Time Analytics Platforms.',
+                'AI Driven Solutions.'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
         });
 
-        const clock = new THREE.Clock();
-        const animate = () => {
-            const elapsedTime = clock.getElapsedTime();
-            particlesMesh.rotation.y = -0.1 * elapsedTime;
-            if (mouseX > 0) {
-                particlesMesh.rotation.x = -mouseY * (elapsedTime * 0.00008);
-                particlesMesh.rotation.y = mouseX * (elapsedTime * 0.00008);
-            }
-            renderer.render(scene, camera);
-            window.requestAnimationFrame(animate);
-        };
-        animate();
-
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        });
-
-        // --- Scroll Animations ---
+        // Scroll Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -414,113 +584,103 @@ My work spans predictive analytics, computer vision, financial monitoring system
                 }
             });
         }, { threshold: 0.2 });
-        document.querySelectorAll('.fade-in').forEach((el) => { observer.observe(el); });
 
-        // --- Mobile Menu ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
         });
 
-        // --- Typed.js ---
-        new Typed('#typed-text', {
-            strings: ['Deep Learning models.', 'scalable data pipelines.', 'interactive dashboards.', 'end-to-end ML solutions.'],
-            typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true
-        });
+        // Copy Email
+        const MY_EMAIL = "your-email@example.com";
 
-        // --- Copy Email Logic ---
-        const MY_EMAIL = "chinmay.d@email.com"; 
         const copyEmailButton = document.getElementById('copy-email-button');
         const copyToast = document.getElementById('copy-toast');
+
         copyEmailButton.addEventListener('click', () => {
-            // Using execCommand as per environment constraints for clipboard reliability
-            const textArea = document.createElement("textarea");
-            textArea.value = MY_EMAIL;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                copyToast.classList.remove('opacity-0', 'translate-y-4');
-                setTimeout(() => {
-                    copyToast.classList.add('opacity-0', 'translate-y-4');
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy email: ', err);
-            }
-            document.body.removeChild(textArea);
+
+            navigator.clipboard.writeText(MY_EMAIL);
+
+            copyToast.classList.remove('opacity-0', 'translate-y-4');
+
+            setTimeout(() => {
+                copyToast.classList.add('opacity-0', 'translate-y-4');
+            }, 2000);
+
         });
 
-        // --- Gemini API Call ---
-        async function callGeminiWithExponentialBackoff(prompt) {
-            const apiKey = ""; // Provided by environment
-            const model = "gemini-2.5-flash-preview-09-2025";
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-            
-            const systemPrompt = "You are an expert technical writer for a software engineering student's portfolio. Your task is to elaborate on a project based on the provided details. Write a single, concise paragraph (around 3-4 sentences). Start by stating the project's primary goal. Briefly explain the technical architecture or how the technologies were used together. Conclude by highlighting the key takeaway or skill demonstrated. Maintain a professional and engaging tone.";
-            
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-            };
+        // THREE JS BACKGROUND
 
-            let delay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+        const scene = new THREE.Scene();
 
-                    if (response.ok) {
-                        const result = await response.json();
-                        return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-                    }
-                    
-                    if (response.status !== 429 && response.status < 500) {
-                        const errorData = await response.json().catch(() => ({}));
-                        throw new Error(`API Error ${response.status}: ${errorData.error?.message || response.statusText}`);
-                    }
-                } catch (error) {
-                    if (i === 4) throw error;
-                    // Exponential backoff happens below
-                }
-                await new Promise(resolve => setTimeout(resolve, delay));
-                delay *= 2;
-            }
-            throw new Error("Failed after 5 retries");
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.getElementById('particle-canvas'),
+            alpha: true
+        });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+
+        const particlesCnt = 5000;
+
+        const posArray = new Float32Array(particlesCnt * 3);
+
+        for (let i = 0; i < particlesCnt * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
         }
 
-        window.generateProjectDetails = async function(projectId) {
-            const card = document.getElementById(`project-${projectId}`);
-            const title = card.querySelector('h3').innerText;
-            const descEl = card.querySelector('p');
-            const button = card.querySelector('.gemini-btn');
-            const originalText = descEl.innerText;
-            const originalButtonHTML = button.innerHTML;
+        particlesGeometry.setAttribute(
+            'position',
+            new THREE.BufferAttribute(posArray, 3)
+        );
 
-            button.disabled = true;
-            button.innerHTML = `<svg class="animate-spin h-5 w-5 mx-auto text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>`;
-            
-            const prompt = `Please elaborate on this project: Title: "${title}", Original Description: "${originalText}".`;
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: 0x3b82f6
+        });
 
-            try {
-                const resultText = await callGeminiWithExponentialBackoff(prompt);
-                descEl.innerText = resultText;
-            } catch (error) {
-                console.error("Gemini API call failed:", error);
-                descEl.innerText = "Sorry, details could not be generated at this moment. Please try again later.";
-                setTimeout(() => { descEl.innerText = originalText; }, 5000);
-            } finally {
-                button.disabled = false;
-                button.innerHTML = originalButtonHTML;
-            }
-        }
+        const particlesMesh = new THREE.Points(
+            particlesGeometry,
+            particlesMaterial
+        );
+
+        scene.add(particlesMesh);
+
+        camera.position.z = 2;
+
+        const clock = new THREE.Clock();
+
+        const animate = () => {
+
+            const elapsedTime = clock.getElapsedTime();
+
+            particlesMesh.rotation.y = -0.1 * elapsedTime;
+
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        window.addEventListener('resize', () => {
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+
+            camera.updateProjectionMatrix();
+
+        });
+
     </script>
+
 </body>
 
 </html>
